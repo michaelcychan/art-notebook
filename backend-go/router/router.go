@@ -10,5 +10,6 @@ func SetupRouter(app *fiber.App) {
 
 	v1Path.Get("/", handler.BasicHelloWorld)
 
-	v1Path.Get("/get-example-painting", handler.GetExampleArticPainting)
+	v1Path.Get("/get-example-painting-Chicago", handler.GetExampleArticPainting)
+	v1Path.Get("/get-example-painting-Metro", handler.GetExampleMetMAArt)
 }
