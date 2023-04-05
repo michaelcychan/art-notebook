@@ -48,6 +48,8 @@ func GetArtworkMetropolitanMusuemArt(artworkID int, c *fiber.Ctx) (MMAArtworkSim
 		return artwork, fmt.Errorf("json unmarshal error")
 	}
 
+	fmt.Println(artwork.ImageURL)
+
 	return artwork, nil
 
 }

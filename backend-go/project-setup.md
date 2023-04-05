@@ -15,6 +15,7 @@ go get -u github.com/gofiber/fiber/v2
 ```
 
 ### Hot reload while developing
+
 Get Go package named Air.  
 
 ```bash

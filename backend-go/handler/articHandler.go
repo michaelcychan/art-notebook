@@ -28,6 +28,8 @@ func GetExampleArticPainting(c *fiber.Ctx) error {
 		"title":             artwork.Data.Title,
 		"short-description": artwork.Data.Thumbnail.ShortDesc,
 		"artist-title":      artwork.Data.ArtistTitles,
+		"work-start":        artwork.Data.DateStart,
+		"work-end":          artwork.Data.DateEnd,
 		"image-url":         fullImageUrl,
 		"museum":            "Art Institute of Chicago",
 		"message":           "OK",
