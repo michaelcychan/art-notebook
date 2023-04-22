@@ -1,25 +1,18 @@
-import {Card} from 'react-bootstrap';
+import {Button, Card} from 'react-bootstrap';
 
 import http from  '../http-common';
 import { useEffect, useState } from 'react';
 
-type backEndJson = {
-  "title": string,
-  "short-description": string,
-  "artist-title": string[],
-  "image-url": string,
-  "museum": string,
-  "work-start":number,
-  "work-end":number,
-  "message": string,
-}
+import {backEndJson} from '../types/backEndJson'
+
+import {ArtCard} from './artCard'
 
 export const ShowArtwork = () => {
 
   const emptyData:backEndJson = {
-    "title": "Sorry! Cannot load!",
+    "title": "Loading...",
     "image-url": "/sorry.gif",
-    "short-description": "Cannot load!",
+    "short-description": "Loading...",
     "artist-title": [],
     "museum": "",
     "work-start": 0,
@@ -27,7 +20,7 @@ export const ShowArtwork = () => {
     "message": "error"
   }
 
-  const [artWork, setArtWork] = useState<backEndJson>()
+  const [artWork, setArtWork] = useState<backEndJson>(emptyData)
 
   const fetchArtworkFromBackend = async () => {
     try {
@@ -44,17 +37,8 @@ export const ShowArtwork = () => {
 
   return (
   <>
-    <Card style={{width: '18rem'}}>
-      {artWork&& <Card.Img variant='top' src={artWork["image-url"]}/>} 
-      <Card.Body>
-        <Card.Title>{artWork ? artWork.title : "This is the Title"} </Card.Title>
-        <Card.Text>{artWork ? artWork['short-description'] : "This is some card text"}</Card.Text>
-      </Card.Body>
-      <Card.Footer>
-        {artWork ? artWork.museum : "failed to load"}
-      </Card.Footer>
-
-    </Card>
+    <ArtCard artWork={artWork}/>
+    <Button className='btn btn-info my-2' onClick={()=>fetchArtworkFromBackend()}>Reload</Button>
   </>
   )
 }
