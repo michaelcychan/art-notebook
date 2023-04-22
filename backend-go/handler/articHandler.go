@@ -5,17 +5,13 @@ package handler
 
 import (
 	"fmt"
-	"math/rand"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/michaelcychan/art-notebook/backend-go/api"
 )
 
 func GetExampleArticPainting(c *fiber.Ctx) error {
-	listOfExampleArtId := []int{15742, 238399, 150152}
-	exampleArtId := listOfExampleArtId[rand.Intn(len(listOfExampleArtId))]
-
-	artwork, err := api.GetTargetArtworkChicago(exampleArtId, c)
+	artwork, err := api.GetRandomArtworkChicagoByTotalPage(c)
 
 	if err != nil {
 		fmt.Println(err)
