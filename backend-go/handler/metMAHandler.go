@@ -12,7 +12,7 @@ import (
 )
 
 func GetExampleMetMAArt(c *fiber.Ctx) error {
-	listOfExmapleArtid := []int{438011, 437428, 437122}
+	listOfExmapleArtid := []string{"438011", "437428", "437122"}
 	exampleArtid := listOfExmapleArtid[rand.Intn(len(listOfExmapleArtid))]
 
 	artwork, err := api.GetArtworkMetropolitanMusuemArt(exampleArtid, c)
@@ -33,7 +33,7 @@ func GetExampleMetMAArt(c *fiber.Ctx) error {
 		"image-url":         artwork.ImageURL,
 		"work-start":        artwork.DateStart,
 		"work-end":          artwork.DateEnd,
-		"museum":            "Metropolitan Museum of Art",
+		"museum":            "Metropolitan Museum of Art, New York",
 		"message":           "OK",
 	})
 

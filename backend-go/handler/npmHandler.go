@@ -22,7 +22,7 @@ func GetArtworkNpm(c *fiber.Ctx) error {
 		"work-start":        0,
 		"work-end":          0,
 		"image-url":         artwork.ImageUrl,
-		"museum":            "National Palace Museum",
+		"museum":            "National Palace Museum, Taipei",
 		"message":           "OK",
 	})
 }

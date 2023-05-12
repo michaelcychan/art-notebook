@@ -29,8 +29,6 @@ type ArtworkFromSearchId struct {
 const NpmBaseUri = "https://openapi.npm.gov.tw/v1/rest"
 
 func GetTargetArtworkByIdNpm(artworkID string, c *fiber.Ctx) (ArtDataNpm, error) {
-	fmt.Println("in Get function")
-
 	var artwork ArtworkFromSearchId
 
 	a := fiber.AcquireAgent()

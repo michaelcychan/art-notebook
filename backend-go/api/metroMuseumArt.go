@@ -20,7 +20,7 @@ type MMAArtworkSimple struct {
 	DateEnd   int    `json:"objectEndDate"`
 }
 
-func GetArtworkMetropolitanMusuemArt(artworkID int, c *fiber.Ctx) (MMAArtworkSimple, error) {
+func GetArtworkMetropolitanMusuemArt(artworkID string, c *fiber.Ctx) (MMAArtworkSimple, error) {
 	const MetMuseumOfArtBaseUri = "https://collectionapi.metmuseum.org/public/collection/v1"
 
 	var artwork MMAArtworkSimple
@@ -28,7 +28,7 @@ func GetArtworkMetropolitanMusuemArt(artworkID int, c *fiber.Ctx) (MMAArtworkSim
 	a := fiber.AcquireAgent()
 	req := a.Request()
 	req.Header.SetMethod(fiber.MethodGet)
-	req.SetRequestURI(MetMuseumOfArtBaseUri + "/objects" + "/" + fmt.Sprint(artworkID))
+	req.SetRequestURI(MetMuseumOfArtBaseUri + "/objects" + "/" + artworkID)
 
 	if err := a.Parse(); err != nil {
 		return artwork, fmt.Errorf("error retrieving info from external api: %s", err)
@@ -47,8 +47,6 @@ func GetArtworkMetropolitanMusuemArt(artworkID int, c *fiber.Ctx) (MMAArtworkSim
 	if unmarshalErr := json.Unmarshal(bodyBytes, &artwork); unmarshalErr != nil {
 		return artwork, fmt.Errorf("json unmarshal error")
 	}
-
-	fmt.Println(artwork.ImageURL)
 
 	return artwork, nil
 

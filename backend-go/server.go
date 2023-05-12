@@ -19,6 +19,7 @@ func main() {
 		serverPort = "3001"
 	}
 
+	app.Static("/", "/")
 	app.Use(cors.New())
 
 	router.SetupRouter(app)
