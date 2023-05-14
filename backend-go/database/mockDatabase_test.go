@@ -11,7 +11,7 @@ func TestGetDataForUser(t *testing.T) {
 		username string
 		length   int
 	}{
-		{"michael", 2},
+		{"michael", 3},
 		{"rachel", 1},
 		{"john", 0},
 	}

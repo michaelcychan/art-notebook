@@ -15,7 +15,7 @@ func GetExampleMetMAArt(c *fiber.Ctx) error {
 	listOfExmapleArtid := []string{"438011", "437428", "437122"}
 	exampleArtid := listOfExmapleArtid[rand.Intn(len(listOfExmapleArtid))]
 
-	artwork, err := api.GetArtworkMetropolitanMusuemArt(exampleArtid, c)
+	artwork, err := api.GetArtworkMetropolitanMusuemArtWtihID(exampleArtid, c)
 
 	if err != nil {
 		fmt.Println(err)

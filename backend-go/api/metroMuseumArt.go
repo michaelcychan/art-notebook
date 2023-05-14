@@ -20,7 +20,7 @@ type MMAArtworkSimple struct {
 	DateEnd   int    `json:"objectEndDate"`
 }
 
-func GetArtworkMetropolitanMusuemArt(artworkID string, c *fiber.Ctx) (MMAArtworkSimple, error) {
+func GetArtworkMetropolitanMusuemArtWtihID(artworkID string, c *fiber.Ctx) (MMAArtworkSimple, error) {
 	const MetMuseumOfArtBaseUri = "https://collectionapi.metmuseum.org/public/collection/v1"
 
 	var artwork MMAArtworkSimple

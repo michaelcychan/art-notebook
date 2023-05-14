@@ -23,6 +23,13 @@
       "source-id": "04000975",
       "tag": ["painting"],
       "note": "different note"
+    },{
+      "id": 4,
+      "user": "michael",
+      "source": "Art Institute of Chicago, Chicago",
+      "source-id": "16568",
+      "tag": ["pond", "Impressionist"],
+      "note": "A good painting"
     }
   ]
 }
