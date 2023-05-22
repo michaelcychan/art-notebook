@@ -26,15 +26,19 @@ type ArtworkDataToFrontend struct {
 
 func ReturnSavedDataJsonForUser(c *fiber.Ctx) error {
 	username := c.Query("username")
+	fmt.Println(username)
 	data, err := database.GetDataForUser(username, "./")
 
 	if err != nil {
+		fmt.Println("error at reading json")
 		return c.Status(500).SendString("Internal Error")
 	}
 
 	var outputJson []ArtworkDataToFrontend
 
-	for _, eachEntry := range data {
+	for idx, eachEntry := range data {
+		fmt.Println("here:", idx)
+
 		var jsonEntry ArtworkDataToFrontend
 		if eachEntry.Source == "National Palace Museum, Taipei" {
 			artworkNPM, err := api.GetTargetArtworkByIdNpm(eachEntry.SourceId, c)
