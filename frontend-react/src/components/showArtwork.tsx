@@ -1,4 +1,4 @@
-import {Button, Card} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 import http from  '../http-common';
 import { useEffect, useState } from 'react';
@@ -22,7 +22,7 @@ export const ShowArtwork = () => {
 
   const [artWork, setArtWork] = useState<backEndJson>(emptyData)
 
-  const fetchArtworkFromBackend = async () => {
+  const fetchArtworkFromArtChicago = async () => {
     try {
       const {data} = await http.get<backEndJson>("/get-example-painting-Chicago")
       setArtWork(data)
@@ -31,14 +31,35 @@ export const ShowArtwork = () => {
     }
   }
 
+  const fetchArtworkFromMetroMArt = async () => {
+    try {
+      const {data} = await http.get<backEndJson>("/get-example-painting-Metro")
+      setArtWork(data)
+    } catch {
+      setArtWork(emptyData)
+    }
+  }
+
+  const fetchNpmArtwork = async () => {
+    try {
+      const {data} = await http.get<backEndJson>("/get-painting-npm")
+      setArtWork(data)
+    } catch {
+      setArtWork(emptyData)
+    }
+  }
+
   useEffect(() => {
-    fetchArtworkFromBackend()
+    fetchArtworkFromArtChicago()
   },[])
 
   return (
   <>
     <ArtCard artWork={artWork}/>
-    <Button className='btn btn-info my-2' onClick={()=>fetchArtworkFromBackend()}>Reload</Button>
+    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtworkFromArtChicago()}>Art Institute of Chicago</Button>
+    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchNpmArtwork()}>National Palace Museum 台灣故宮</Button>
+    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtworkFromMetroMArt()}>Metropolitan Museum of Art</Button>
+    
   </>
   )
 }
