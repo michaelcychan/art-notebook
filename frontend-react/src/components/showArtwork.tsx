@@ -17,7 +17,10 @@ export const ShowArtwork = () => {
     "museum": "",
     "work-start": 0,
     "work-end": 0,
-    "message": "error"
+    "source-id": "",
+    "message": "error",
+    "Tags": [],
+    "note": ""
   }
 
   const [artWork, setArtWork] = useState<backEndJson>(emptyData)

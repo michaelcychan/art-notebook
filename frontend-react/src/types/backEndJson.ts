@@ -7,4 +7,7 @@ export type backEndJson = {
   "work-start":number,
   "work-end":number,
   "message": string,
+  "source-id": string,
+  "Tags": string[],
+  "note": string,
 }
