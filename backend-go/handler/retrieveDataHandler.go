@@ -20,8 +20,8 @@ type ArtworkDataToFrontend struct {
 	FullImageUrl string   `json:"image-url"`
 	Musuem       string   `json:"museum"`
 	Message      string
-	Tags         []string
-	Note         string
+	Tags         []string `json:"tags"`
+	Note         string   `json:"note"`
 }
 
 func ReturnSavedDataJsonForUser(c *fiber.Ctx) error {
@@ -36,8 +36,7 @@ func ReturnSavedDataJsonForUser(c *fiber.Ctx) error {
 
 	var outputJson []ArtworkDataToFrontend
 
-	for idx, eachEntry := range data {
-		fmt.Println("here:", idx)
+	for _, eachEntry := range data {
 
 		var jsonEntry ArtworkDataToFrontend
 		if eachEntry.Source == "National Palace Museum, Taipei" {
