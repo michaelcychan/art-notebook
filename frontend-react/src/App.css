@@ -25,7 +25,7 @@
   color: white;
 }
 
-div.description-container {
+p.card-text {
   -webkit-mask-image: linear-gradient(black, transparent);
   mask-image: linear-gradient(black, transparent);
 }

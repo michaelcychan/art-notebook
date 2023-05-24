@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import http from  '../http-common';
 
 import {backEndJson} from '../types/backEndJson';
@@ -15,7 +15,6 @@ export const ShowSavedWork = () => {
   const [username, setUsername] = useState("");
 
   const handleUsernameChange = (username:string) => {
-    console.log(username);
     setUsername(username);
   }
 

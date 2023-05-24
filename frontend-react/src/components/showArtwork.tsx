@@ -1,7 +1,7 @@
 import {Button} from 'react-bootstrap';
 
 import http from  '../http-common';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {backEndJson} from '../types/backEndJson'
 
@@ -19,8 +19,7 @@ export const ShowArtwork = () => {
     "work-start": 0,
     "work-end": 0,
     "source-id": "",
-    "message": "error",
-    "Tags": [],
+    "tags": [],
     "note": ""
   }
 
@@ -33,16 +32,26 @@ export const ShowArtwork = () => {
     "work-start": 0,
     "work-end": 0,
     "source-id": "",
-    "message": "loading",
-    "Tags": [],
+    "tags": [],
     "note": ""
   })
 
-  const fetchArtworkFromArtChicago = async () => {
+  const fetchIsCancelled = useRef(false);
+
+  const fetchArtwork = async (museum:String) => {
+    const museumMap: {[id:string]:string} = {
+      "chicago": "get-example-painting-Chicago",
+      "npm": "get-painting-npm",
+      "metro": "get-example-painting-Metro"
+    }
     try {
-      const {data} = await http.get<backEndJson>("/get-example-painting-Chicago")
-      setArtWork(data)
-    } catch (err:unknown) {
+      const endpoint = "/" + museumMap[`${museum}`];
+      const {data} = await http.get<backEndJson>(endpoint);
+      
+      if (!fetchIsCancelled.current) {
+        setArtWork(data)
+      }
+    } catch (err) {
       if (err instanceof AxiosError) {
         console.error("cannot connect to server");
       }
@@ -50,34 +59,19 @@ export const ShowArtwork = () => {
     }
   }
 
-  const fetchArtworkFromMetroMArt = async () => {
-    try {
-      const {data} = await http.get<backEndJson>("/get-example-painting-Metro")
-      setArtWork(data)
-    } catch {
-      setArtWork(errorGettingData)
-    }
-  }
-
-  const fetchNpmArtwork = async () => {
-    try {
-      const {data} = await http.get<backEndJson>("/get-painting-npm")
-      setArtWork(data)
-    } catch {
-      setArtWork(errorGettingData)
-    }
-  }
-
   useEffect(() => {
-    fetchArtworkFromArtChicago()
+    fetchArtwork("chicago");
+    return () => {
+      fetchIsCancelled.current = true;
+    }
   },[])
 
   return (
   <>
     <ArtCard artWork={artWork}/>
-    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtworkFromArtChicago()}>Art Institute of Chicago</Button>
-    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchNpmArtwork()}>National Palace Museum 台灣故宮</Button>
-    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtworkFromMetroMArt()}>Metropolitan Museum of Art</Button>
+    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtwork("chicago")}>Art Institute of Chicago</Button>
+    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtwork("npm")}>National Palace Museum 台灣故宮</Button>
+    <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtwork("metro")}>Metropolitan Museum of Art</Button>
     
   </>
   )

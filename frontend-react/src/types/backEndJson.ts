@@ -6,8 +6,7 @@ export type backEndJson = {
   "museum": string,
   "work-start":number,
   "work-end":number,
-  "message": string,
   "source-id": string,
-  "Tags": string[],
+  "tags": string[],
   "note": string,
 }
