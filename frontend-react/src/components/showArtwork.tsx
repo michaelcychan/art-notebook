@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import {backEndJson} from '../types/backEndJson'
 
 import {ArtCard} from './artCard'
+import { AxiosError } from 'axios';
 
 export const ShowArtwork = () => {
 
-  const emptyData:backEndJson = {
+  const errorGettingData:backEndJson = {
     "title": "Loading...",
     "image-url": "/sorry.gif",
-    "short-description": "Loading...",
+    "short-description": "",
     "artist-title": [],
     "museum": "",
     "work-start": 0,
@@ -23,14 +24,29 @@ export const ShowArtwork = () => {
     "note": ""
   }
 
-  const [artWork, setArtWork] = useState<backEndJson>(emptyData)
+  const [artWork, setArtWork] = useState<backEndJson>({
+    "title": "Loading...",
+    "image-url": "/sorry.gif",
+    "short-description": "Loading...",
+    "artist-title": [],
+    "museum": "Loading...",
+    "work-start": 0,
+    "work-end": 0,
+    "source-id": "",
+    "message": "loading",
+    "Tags": [],
+    "note": ""
+  })
 
   const fetchArtworkFromArtChicago = async () => {
     try {
       const {data} = await http.get<backEndJson>("/get-example-painting-Chicago")
       setArtWork(data)
-    } catch {
-      setArtWork(emptyData)
+    } catch (err:unknown) {
+      if (err instanceof AxiosError) {
+        console.error("cannot connect to server");
+      }
+      setArtWork(errorGettingData);
     }
   }
 
@@ -39,7 +55,7 @@ export const ShowArtwork = () => {
       const {data} = await http.get<backEndJson>("/get-example-painting-Metro")
       setArtWork(data)
     } catch {
-      setArtWork(emptyData)
+      setArtWork(errorGettingData)
     }
   }
 
@@ -48,7 +64,7 @@ export const ShowArtwork = () => {
       const {data} = await http.get<backEndJson>("/get-painting-npm")
       setArtWork(data)
     } catch {
-      setArtWork(emptyData)
+      setArtWork(errorGettingData)
     }
   }
 

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #f4f4f2;
 }
 
 .App-logo {
@@ -24,15 +25,27 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+div.description-container {
+  -webkit-mask-image: linear-gradient(black, transparent);
+  mask-image: linear-gradient(black, transparent);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+div.card-header {
+  background-color: white;
+}
+
+.artcard {
+  filter: brightness(1);
+  position: inherit;
+}
+
+img.card-img-top {
+  max-width: 97%;
+}
+
+.artcard:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3);
+  top: -1px;
+  left: -1px;
 }
