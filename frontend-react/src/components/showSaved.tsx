@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 import http from  '../http-common';
 
 import {backEndJson} from '../types/backEndJson';
@@ -12,15 +12,15 @@ export const ShowSavedWork = () => {
 
   const [savedData, setSavedData] = useState<backEndJson[]>([]);
 
-  const [username, setUsername] = useState("");
+  const usernameRef = useRef<HTMLInputElement | null>(null);
 
-  const handleUsernameChange = (username:string) => {
-    setUsername(username);
-  }
-
-  const fetchSavedWork = async (username: String) => {
+  const handleSubmit = async (e:FormEvent) => {
+    e.preventDefault();
+    if (!usernameRef.current) {
+      return
+    }
     try {
-      const endpointUri = "/get-saved-data?username=" + username
+      const endpointUri = "/get-saved-data?username=" + usernameRef.current.value;
       const {data} = await http.get<savedData>(endpointUri) 
       if (data.data.length > 0) {
         setSavedData(data.data);
@@ -32,9 +32,11 @@ export const ShowSavedWork = () => {
 
   return (
     <>
-      <label htmlFor="username-notebook">Username:</label>
-      <input id='username-notebook' type="text" value={username} onChange={(event:ChangeEvent<HTMLInputElement>) => handleUsernameChange(event.target.value)}/>
-      <button onClick={() => fetchSavedWork(username)}>Check notebook</button>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="username-notebook">Username:</label>
+        <input id='username-notebook' name='username-notebook' ref={usernameRef} />
+        <button type='submit'>Check notebook</button>
+      </form>
       <div className="card-container container-fluid">
         <div className="row">
           {savedData.length > 0 &&
