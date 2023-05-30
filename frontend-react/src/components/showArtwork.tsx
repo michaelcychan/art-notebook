@@ -68,7 +68,9 @@ export const ShowArtwork = () => {
 
   return (
   <>
-    <ArtCard artWork={artWork}/>
+    <div className="random-container">
+      <ArtCard artWork={artWork}/>
+    </div>
     <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtwork("chicago")}>Art Institute of Chicago</Button>
     <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtwork("npm")}>National Palace Museum 台灣故宮</Button>
     <Button className='btn btn-info my-2 mx-2' onClick={()=>fetchArtwork("metro")}>Metropolitan Museum of Art</Button>

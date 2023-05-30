@@ -8,7 +8,15 @@ import { ShowSavedWork } from './components/showSaved';
 function App() {
   return (
     <div className="App">
-      <ShowArtwork />
+      <div className="header">
+        <div id="title">
+          <h1 id='title' className='display-1'>
+            Art Notebook
+          </h1>
+        </div>
+      </div>
+        <ShowArtwork />
+
       <hr />
       <ShowSavedWork />
     </div>

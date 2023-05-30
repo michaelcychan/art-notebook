@@ -42,9 +42,7 @@ export const ShowSavedWork = () => {
           {savedData.length > 0 &&
             savedData.map(artData =>{ 
               return (
-                <div className='col justify-content-center col-xl-3 col-lg-4 col-sm-12'  key={artData.museum + artData['source-id']}>
-                <ArtCard artWork={artData}/>
-                </div>
+                <ArtCard artWork={artData} key={artData.museum + artData['source-id']}/>
               ) 
             }
             )

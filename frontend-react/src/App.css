@@ -25,13 +25,42 @@
   color: white;
 }
 
+div.header {
+  height: 300px;
+  width: 100vw;
+  background-image: url("/public/images/header-bg-1920.png");
+  position: relative;
+}
+
+div#title {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  padding: 5px;
+  background-color: rgba(240, 227, 190, 0.3);
+}
+
+h1#title{
+  color: white;
+}
+
 p.card-text {
-  -webkit-mask-image: linear-gradient(black, transparent);
-  mask-image: linear-gradient(black, transparent);
+  min-height: 70%;
+  
+}
+
+div.random-container {
+  height: 250px;
 }
 
 div.card-header {
   background-color: white;
+}
+
+div.card-body {
+  -webkit-mask-image: linear-gradient(black, transparent);
+  mask-image: linear-gradient(black, transparent);
+
 }
 
 .artcard {
@@ -39,8 +68,9 @@ div.card-header {
   position: inherit;
 }
 
-img.card-img-top {
-  max-width: 97%;
+img.card-img {
+  max-height: 180px;
+  width: auto;
 }
 
 .artcard:hover {
