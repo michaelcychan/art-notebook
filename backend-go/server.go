@@ -5,6 +5,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 
 	"github.com/michaelcychan/art-notebook/backend-go/config"
+	"github.com/michaelcychan/art-notebook/backend-go/database"
 	"github.com/michaelcychan/art-notebook/backend-go/router"
 )
 
@@ -13,6 +14,7 @@ func main() {
 	//database.Connect()
 
 	app := fiber.New()
+	database.Connect()
 
 	serverPort := config.Config("PORT")
 	if serverPort == "" {
