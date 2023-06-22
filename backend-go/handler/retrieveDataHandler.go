@@ -8,6 +8,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/michaelcychan/art-notebook/backend-go/api"
 	"github.com/michaelcychan/art-notebook/backend-go/database"
+	"github.com/michaelcychan/art-notebook/backend-go/models"
+	"gorm.io/gorm"
 )
 
 type ArtworkDataToFrontend struct {
@@ -24,9 +26,23 @@ type ArtworkDataToFrontend struct {
 	Note         string   `json:"note"`
 }
 
+func GetSavedDataByUser(c *fiber.Ctx) error {
+	username := c.Query("username")
+	var saved []models.Notebook
+
+	result := database.DB.DB.Find(&saved, "username = ?", username)
+	if err := result.Error; err != nil {
+		fmt.Println(err)
+		if err == gorm.ErrRecordNotFound {
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"status": "no record for this user"})
+		}
+		return c.Status(fiber.StatusBadGateway).JSON(fiber.Map{"status": "server error"})
+	}
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"data": saved})
+}
+
 func ReturnSavedDataJsonForUser(c *fiber.Ctx) error {
 	username := c.Query("username")
-	fmt.Println(username)
 	data, err := database.GetDataForUser(username, "./")
 
 	if err != nil {

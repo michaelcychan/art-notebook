@@ -28,7 +28,8 @@ func Connect() (*gorm.DB, error) {
 
 	fmt.Println("Database connection success")
 
-	db.AutoMigrate(&models.SavedData{})
-	return db, nil
+	db.AutoMigrate(&models.Notebook{})
 
+	DB.DB = db
+	return db, nil
 }

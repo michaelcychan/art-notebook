@@ -15,4 +15,5 @@ func SetupRouter(app *fiber.App) {
 	v1Path.Get("/get-painting-npm/", handler.GetArtworkNpm)
 
 	v1Path.Get("/get-saved-data/", handler.ReturnSavedDataJsonForUser)
+	v1Path.Get("/get-saved-data-by-user/", handler.GetSavedDataByUser)
 }
